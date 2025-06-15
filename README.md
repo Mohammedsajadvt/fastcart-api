@@ -16,7 +16,7 @@ This is the backend API for the **FastCart Admin** dashboard built with **Node.j
 - 🛡️ Error handling & logging
 
 ---
-
+---
 ## 📁 Folder Structure
 ```bash
 server/
