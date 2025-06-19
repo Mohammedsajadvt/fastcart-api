@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FastCart Admin API</title>
+  <style>
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      color: #1C2A4F;
+      margin-bottom: 30px;
+    }
+    .card-container {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: left;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .method {
+      display: inline-block;
+      background: #0077cc;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+    .endpoint {
+      font-size: 16px;
+      color: #333;
+    }
+    .link-card {
+      background: #eef5ff;
+    }
+    .link-card a {
+      color: #0077cc;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛒 FastCart Admin API</h1>
+
+  <div class="card-container">
+    <div class="card">
+      <span class="method">POST</span>
+      <span class="endpoint">/api/admin/register</span>
+    </div>
+    <div class="card">
+      <span class="method">POST</span>
+      <span class="endpoint">/api/admin/login</span>
+    </div>
+    <div class="card link-card">
+      <a href="/api-docs" target="_blank">📘 View Swagger API Docs</a>
+    </div>
+    <div class="card link-card">
+      <a href="/api/time" target="_blank">🕒 Check Server Time</a>
+    </div>
+  </div>
+
+</body>
+</html>

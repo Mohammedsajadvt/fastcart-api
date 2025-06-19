@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FastCart Admin API",
+    "version": "1.0.0",
+    "description": "Authentication, OAuth and Password Recovery endpoints for FastCart Admin Dashboard."
+  },
+  "tags": [
+    {
+      "name": "Authentication - Admin",
+      "description": "Admin login, register, and password recovery"
+    },
+    {
+      "name": "OAuth - Admin",
+      "description": "Google and Facebook OAuth integration"
+    }
+  ],
+  "paths": {
+    "/api/admin/register": {
+      "post": {
+        "tags": ["Authentication - Admin"],
+        "summary": "Register a new admin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string", "example": "admin@example.com" },
+                  "password": { "type": "string", "example": "securePass123" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Admin created" },
+          "400": { "description": "Already exists" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/admin/login": {
+      "post": {
+        "tags": ["Authentication - Admin"],
+        "summary": "Login an admin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string", "example": "admin@example.com" },
+                  "password": { "type": "string", "example": "securePass123" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login success" },
+          "401": { "description": "Invalid credentials" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/forgot-password": {
+      "post": {
+        "tags": ["Authentication - Admin"],
+        "summary": "Request OTP to email",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "admin@example.com" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OTP sent" },
+          "404": { "description": "Email not found" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/verify-otp": {
+      "post": {
+        "tags": ["Authentication - Admin"],
+        "summary": "Verify OTP code",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "otp": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OTP verified" },
+          "400": { "description": "Invalid or expired OTP" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/reset-password": {
+      "post": {
+        "tags": ["Authentication - Admin"],
+        "summary": "Reset password after OTP verification",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "newPassword"],
+                "properties": {
+                  "email": { "type": "string" },
+                  "newPassword": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Password updated" },
+          "400": { "description": "OTP not verified" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "tags": ["OAuth - Admin"],
+        "summary": "Initiate Google OAuth login",
+        "responses": {
+          "302": { "description": "Redirect to Google consent screen" }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "tags": ["OAuth - Admin"],
+        "summary": "Handle Google OAuth callback",
+        "responses": {
+          "200": { "description": "Login success, return token" },
+          "401": { "description": "Unauthorized" }
+        }
+      }
+    },
+    "/auth/facebook": {
+      "get": {
+        "tags": ["OAuth - Admin"],
+        "summary": "Initiate Facebook OAuth login",
+        "responses": {
+          "302": { "description": "Redirect to Facebook consent screen" }
+        }
+      }
+    },
+    "/auth/facebook/callback": {
+      "get": {
+        "tags": ["OAuth - Admin"],
+        "summary": "Handle Facebook OAuth callback",
+        "responses": {
+          "200": { "description": "Login success, return token" },
+          "401": { "description": "Unauthorized" }
+        }
+      }
+    }
+  }
+}
